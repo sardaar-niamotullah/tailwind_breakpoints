@@ -1,39 +1,94 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# 📐 tailwind_breakpoints
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+TailwindCSS style, mobile-first responsive breakpoints for Flutter.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+![tailwind_breakpoints](https://raw.githubusercontent.com/sardaar-niamotullah/tailwind_breakpoints/main/assets/tailwind_breakpoints.webp)
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Each breakpoint (`context.sm`, `context.md`, ...) is true from its width upwards, just like Tailwind's `md:` prefix. Check the screen size with simple getters on `BuildContext`, like `context.md`, `context.minWidth(900)` or `context.screenWidth`, instead of writing `MediaQuery.of(context).size.width`.
 
-## Features
+## 📦 Installation
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Run this in your project:
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```bash
+flutter pub add tailwind_breakpoints
 ```
 
-## Additional information
+Then import it:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+import 'package:tailwind_breakpoints/tailwind_breakpoints.dart';
+```
+
+## 🚀 Usage
+
+```dart
+Widget build(BuildContext context) {
+  if (context.lg) return const DesktopLayout();
+  if (context.md) return const TabletLayout();
+  return const MobileLayout();
+}
+```
+
+## 📏 Breakpoints
+
+Flags are **mobile-first**: each one is true from its width upwards, so
+several can be true at once. Check the largest first.
+
+| Flag          | Minimum width |
+| ------------- | ------------- |
+| `context.xs`  | 480           |
+| `context.sm`  | 640           |
+| `context.md`  | 768           |
+| `context.lg`  | 1024          |
+| `context.xl`  | 1280          |
+| `context.xxl` | 1536          |
+
+Widths are in logical pixels. Below 480, no flag is true.
+
+## 🧩 API
+
+| Member                         | Description                       |
+| ------------------------------ | --------------------------------- |
+| `context.screenSize`           | Current window `Size`             |
+| `context.screenWidth`          | Window width                      |
+| `context.screenHeight`         | Window height                     |
+| `context.xs` ... `context.xxl` | True when width >= the breakpoint |
+| `context.minWidth(value)`      | True when width >= `value`        |
+| `context.maxWidth(value)`      | True when width < `value`         |
+| `context.between(min, max)`    | True when `min` <= width < `max`  |
+| `Breakpoints.xs` ... `.xxl`    | The default breakpoint values     |
+
+📖 [Full reference](https://pub.dev/documentation/tailwind_breakpoints/latest/)
+
+## ✨ Why use it?
+
+**Before**
+
+```dart
+final width = MediaQuery.of(context).size.width;
+if (width >= 768) {
+  // tablet and up
+}
+```
+
+**After**
+
+```dart
+if (context.md) {
+  // tablet and up
+}
+```
+
+- ✂️ **Less code.** One getter replaces the lookup and the comparison.
+- 🎯 **No magic numbers.** Breakpoint values live in one place instead of being repeated across your widgets.
+- ⚡ **Fewer rebuilds.** It is built on `MediaQuery.sizeOf(context)`, not `MediaQuery.of(context)`. Your widgets only rebuild when the screen size changes, not when the keyboard opens or the padding changes.
+
+## 🧪 Example
+
+See the [example](https://github.com/sardaar-niamotullah/tailwind_breakpoints/tree/main/example) app, and resize the window to watch the
+breakpoints change.
+
+## 🛠️ Maintainer
+
+- [Sardaar Niamotullah](https://github.com/sardaar-niamotullah)
