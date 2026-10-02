@@ -1,6 +1,6 @@
 name: tailwind_breakpoints
 description: "TailwindCSS style, mobile-first responsive breakpoints for Flutter, with simple getters like context.sm context.md, and more."
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/sardaar-niamotullah/tailwind_breakpoints
 issue_tracker: https://github.com/sardaar-niamotullah/tailwind_breakpoints/issues
 homepage: https://github.com/sardaar-niamotullah/tailwind_breakpoints

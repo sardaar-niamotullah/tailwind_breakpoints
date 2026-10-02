@@ -1,3 +1,8 @@
+## 0.1.1
+
+- Improved README: added a responsive breakpoint infographic and merged the usage sections.
+
+
 ## 0.1.0
 
 Initial Version of the library.
