@@ -2,7 +2,7 @@
 
 TailwindCSS style, mobile-first responsive breakpoints for Flutter.
 
-![tailwind_breakpoints](https://raw.githubusercontent.com/sardaar-niamotullah/tailwind_breakpoints/main/assets/breakpoints_map.webp)
+![tailwind_breakpoints](https://raw.githubusercontent.com/sardaar-niamotullah/tailwind_breakpoints/main/assets/infographic.webp)
 
 Each breakpoint (`context.sm`, `context.md`, ...) is true from its width upwards, just like Tailwind's `md:` prefix. Check the screen size with simple getters on `BuildContext`, like `context.md`, `context.minWidth(900)` or `context.screenWidth`, instead of writing `MediaQuery.of(context).size.width`.
 
@@ -20,7 +20,28 @@ Then import it:
 import 'package:tailwind_breakpoints/tailwind_breakpoints.dart';
 ```
 
-## 🚀 Usage
+## ✨ Usage
+
+Replace manual width checks with a single getter.
+
+**Before**
+
+```dart
+final width = MediaQuery.of(context).size.width;
+if (width >= 768) {
+  // tablet and up
+}
+```
+
+**After**
+
+```dart
+if (context.md) {
+  // tablet and up
+}
+```
+
+To pick a different layout per screen size, check the largest breakpoint first:
 
 ```dart
 Widget build(BuildContext context) {
@@ -29,6 +50,10 @@ Widget build(BuildContext context) {
   return const MobileLayout();
 }
 ```
+
+- ✂️ **Less code.** One getter replaces the lookup and the comparison.
+- 🎯 **No magic numbers.** Breakpoint values live in one place instead of being repeated across your widgets.
+- ⚡ **Fewer rebuilds.** It is built on `MediaQuery.sizeOf(context)`, not `MediaQuery.of(context)`. Your widgets only rebuild when the screen size changes, not when the keyboard opens or the padding changes.
 
 ## 📏 Breakpoints
 
@@ -60,29 +85,6 @@ Widths are in logical pixels. Below 480, no flag is true.
 | `Breakpoints.xs` ... `.xxl`    | The default breakpoint values     |
 
 📖 [Full reference](https://pub.dev/documentation/tailwind_breakpoints/latest/)
-
-## ✨ Why use it?
-
-**Before**
-
-```dart
-final width = MediaQuery.of(context).size.width;
-if (width >= 768) {
-  // tablet and up
-}
-```
-
-**After**
-
-```dart
-if (context.md) {
-  // tablet and up
-}
-```
-
-- ✂️ **Less code.** One getter replaces the lookup and the comparison.
-- 🎯 **No magic numbers.** Breakpoint values live in one place instead of being repeated across your widgets.
-- ⚡ **Fewer rebuilds.** It is built on `MediaQuery.sizeOf(context)`, not `MediaQuery.of(context)`. Your widgets only rebuild when the screen size changes, not when the keyboard opens or the padding changes.
 
 ## 🧪 Example
 
