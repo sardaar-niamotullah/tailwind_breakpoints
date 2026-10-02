@@ -2,7 +2,7 @@
 
 TailwindCSS style, mobile-first responsive breakpoints for Flutter.
 
-![tailwind_breakpoints](https://raw.githubusercontent.com/sardaar-niamotullah/tailwind_breakpoints/main/assets/tailwind_breakpoints.webp)
+![tailwind_breakpoints](https://raw.githubusercontent.com/sardaar-niamotullah/tailwind_breakpoints/main/assets/breakpoints_map.webp)
 
 Each breakpoint (`context.sm`, `context.md`, ...) is true from its width upwards, just like Tailwind's `md:` prefix. Check the screen size with simple getters on `BuildContext`, like `context.md`, `context.minWidth(900)` or `context.screenWidth`, instead of writing `MediaQuery.of(context).size.width`.
 
